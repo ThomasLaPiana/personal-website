@@ -1,25 +1,36 @@
 (ns personal-website.core
   (:require
-   [reagent.core :as reagent]
-   ))
+   [reagent.core :as reagent]))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Vars
 
-(defonce app-state
-  (reagent/atom {}))
-
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Page
+;; Home Page
 
-(defn page [ratom]
+(defn header-component []
   [:div
-   "Welcome to reagent-figwheel."])
+   [:h1 "About Me"]])
 
+(defn body-component []
+  [:div
+   [:p "Things I like include:"
+    [:ul
+     [:li "Music"]
+     [:li "Netflix"]
+     [:li "Gaming"]]]])
 
+(defn footer-component []
+  [:div
+   [:p "We chillin for now"]])
+
+(defn home-page []
+  [:div
+   [header-component]
+   [body-component]
+   [footer-component]])
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Initialize App
@@ -31,7 +42,7 @@
     ))
 
 (defn reload []
-  (reagent/render [page app-state]
+  (reagent/render [home-page]
                   (.getElementById js/document "app")))
 
 (defn ^:export main []
