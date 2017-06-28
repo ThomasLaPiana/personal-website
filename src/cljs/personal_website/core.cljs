@@ -19,7 +19,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Vars
-(defonce body-content (r/atom music-content))
+(defonce body-content (r/atom [:div [:h3 "Click on a Title"]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Home Page
@@ -36,13 +36,13 @@
   (let [val "Mixing"]
   [:div.column-left
    [:h3.center {:style {:cursor "pointer"}
-                :on-click #(swap! body-content music-content)}val]]))
+                :on-click #(reset! body-content music-content)}val]]))
 
 (defn coding-column []
   (let [val "Coding"]
   [:div.column-center
    [:h3.center {:style {:cursor "pointer"}
-                :on-click #(swap! body-content coding-content)}val]]))
+                :on-click #(reset! body-content coding-content)}val]]))
 
 (defn gaming-column []
   [:div.column-right
