@@ -1,0 +1,16 @@
+(def test {:foo "foo",:bar "bar})
+test
+(get test :foo)
+(def test {:foo "foo",:bar "bar"})
+(def foo {:foo "foo",:bar "bar"})
+(get foo :foo)
+(def bar "bar")
+bar
+(get foo bar
+(get foo bar)
+(get foo :bar)
+(def ree "foo")
+(get foo ree)
+(get foo :ree)
+(get foo (keyword ree))
+exit

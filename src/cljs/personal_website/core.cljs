@@ -15,21 +15,25 @@
 
 (defn coding-content []
   [:div
-   [:p "Test"]])
+   [:p "Coding Test"]])
+
+(defn gaming-content []
+  [:div
+   [:p "Gaming Test"]])
+
+(def content-map
+  {:Mixing music-content
+   :Coding coding-content
+   :Gaming gaming-content})
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Vars
 (defonce app-state
   (r/atom
-    {:body-content [music-content]
-     :active-column "Mixing"}))
+     {:active-column "Mixing"}))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Home Page
-
-(defn content-box [val]
-  [:div.content-box
-   [:p "This is a content box"]])
 
 (defn header-component []
   [:div
@@ -64,17 +68,12 @@
      [music-column]
      [coding-column]
      [gaming-column]]
-   [:div [:body-content @app-state]]])
-
-(defn footer-component []
-  [:div
-   [:p.center "We chillin for now"]])
+   [:div.content-box [(get content-map (keyword (:active-column @app-state)))]]])
 
 (defn app[]
   [:div
    [header-component]
-   [body-component]
-   [footer-component]])
+   [body-component]])
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Initialize App
