@@ -19,7 +19,10 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Vars
-(defonce body-content (r/atom [:div [:h3 "Click on a Title"]]))
+(defonce app-state
+  (r/atom
+    {:body-content [music-content]
+     :active-column "Mixing"}))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Home Page
@@ -36,17 +39,22 @@
   (let [val "Mixing"]
   [:div.column-left
    [:h3.center {:style {:cursor "pointer"}
-                :on-click #(reset! body-content music-content)}val]]))
+                :class (if (= (:active-column @app-state) val) "active-header")
+                :on-click #(swap! app-state assoc-in [:active-column] val)}val]]))
 
 (defn coding-column []
   (let [val "Coding"]
   [:div.column-center
    [:h3.center {:style {:cursor "pointer"}
-                :on-click #(reset! body-content coding-content)}val]]))
+                :class (if (= (:active-column @app-state) val) "active-header")
+                :on-click #(swap! app-state assoc-in [:active-column] val)}val]]))
 
 (defn gaming-column []
+  (let [val "Gaming"]
   [:div.column-right
-   [:h3.center "I play a lot of Games"]])
+   [:h3.center {:style {:cursor "pointer"}
+                :class (if (= (:active-column @app-state) val) "active-header")
+                :on-click #(swap! app-state assoc-in [:active-column] val)}val]]))
 
 (defn body-component []
   [:div
@@ -56,13 +64,13 @@
      [music-column]
      [coding-column]
      [gaming-column]]
-   [:div [body-content]]])
+   [:div [:body-content @app-state]]])
 
 (defn footer-component []
   [:div
    [:p.center "We chillin for now"]])
 
-(defn home-page []
+(defn app[]
   [:div
    [header-component]
    [body-component]
@@ -78,7 +86,7 @@
     ))
 
 (defn reload []
-  (r/render [home-page]
+  (r/render [app]
                   (.getElementById js/document "app")))
 
 (defn ^:export main []
