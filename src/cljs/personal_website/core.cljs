@@ -21,16 +21,18 @@
   [:div
    [:p "Gaming Test"]])
 
-(def content-map
-  {:Mixing music-content
-   :Coding coding-content
-   :Gaming gaming-content})
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Vars
 (defonce app-state
   (r/atom
      {:active-column "Mixing"}))
+
+(def content-map
+  {:Mixing music-content
+   :Coding coding-content
+   :Gaming gaming-content})
+
+(def title-list ["Mixing", "Coding", "Gaming"])
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Home Page
@@ -39,23 +41,9 @@
   [:div
    [:h1 "Thomas La Piana"]])
 
-(defn music-column []
-  (let [val "Mixing"]
+(defn column-header [column-title]
+  (let [val column-title]
   [:div.column-left
-   [:h3.center {:style {:cursor "pointer"}
-                :class (if (= (:active-column @app-state) val) "active-header")
-                :on-click #(swap! app-state assoc-in [:active-column] val)}val]]))
-
-(defn coding-column []
-  (let [val "Coding"]
-  [:div.column-center
-   [:h3.center {:style {:cursor "pointer"}
-                :class (if (= (:active-column @app-state) val) "active-header")
-                :on-click #(swap! app-state assoc-in [:active-column] val)}val]]))
-
-(defn gaming-column []
-  (let [val "Gaming"]
-  [:div.column-right
    [:h3.center {:style {:cursor "pointer"}
                 :class (if (= (:active-column @app-state) val) "active-header")
                 :on-click #(swap! app-state assoc-in [:active-column] val)}val]]))
@@ -65,9 +53,8 @@
    [:h2
     {:style {:color "black",:text-align "center"}} "Things I do:"]
     [:div
-     [music-column]
-     [coding-column]
-     [gaming-column]]
+     (for [title title-list]
+      ^{:key title} [column-header title])]
    [:div.content-box [(get content-map (keyword (:active-column @app-state)))]]])
 
 (defn app[]
