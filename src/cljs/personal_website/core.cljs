@@ -15,11 +15,11 @@
 
 (defn coding-content []
   [:div
-   [:p "Coding Test"]])
+   [:p "Coding Content"]])
 
 (defn gaming-content []
   [:div
-   [:p "Gaming Test"]])
+   [:p "Gaming Content"]])
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Vars
@@ -32,35 +32,38 @@
    :Coding coding-content
    :Gaming gaming-content})
 
-(def title-list ["Mixing", "Coding", "Gaming"])
+(def header-list ["Mixing", "Coding", "Gaming"])
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Home Page
 
-(defn header-component []
+(defn title-component []
   [:div
    [:h1 "Thomas La Piana"]])
 
 (defn column-header [column-title]
   (let [val column-title]
-  [:div.column-left
+  [:div.column-header
    [:h3.center {:style {:cursor "pointer"}
                 :class (if (= (:active-column @app-state) val) "active-header")
                 :on-click #(swap! app-state assoc-in [:active-column] val)}val]]))
 
-(defn body-component []
+(defn header-component []
   [:div
-   [:h2
-    {:style {:color "black",:text-align "center"}} "Things I do:"]
-    [:div
-     (for [title title-list]
-      ^{:key title} [column-header title])]
-   [:div.content-box [(get content-map (keyword (:active-column @app-state)))]]])
+   [:h2 {:style {:color "black",:text-align "center"}} "Things I do:"]
+   [:div
+     (for [title header-list]
+      ^{:key title} [column-header title])]])
+
+(defn content-component []
+  [:div.content-box
+   [(get content-map (keyword (:active-column @app-state)))]])
 
 (defn app[]
   [:div
+   [title-component]
    [header-component]
-   [body-component]])
+   [content-component]])
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Initialize App

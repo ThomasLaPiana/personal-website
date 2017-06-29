@@ -17,17 +17,7 @@ body {
   text-align: center;
 }
 
-.column-left {
-  float: left;
-  width: 33%;
-}
-
-.column-right {
-  float: right;
-  width: 33%;
-}
-
-.column-center {
+.column-header{
   display: inline-block;
   width: 33%;
   border-left: 1px solid gray;
@@ -38,8 +28,10 @@ body {
   border: 5px solid black;
   text-align: center;
   padding-right: 5px;
+  margin-top: 15px;
 }
 
 .active-header {
-  background-color: skyblue;
+  background-color: gray;
+  color: black;
 }
