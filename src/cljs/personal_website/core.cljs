@@ -7,6 +7,7 @@
 
 (defn music-content []
   [:div
+   [:p "I mix music under the pseudonym 'Shady Duchess', Peep my mixes on soundcloud:"]
    [:iframe {:width "100%"
              :height "450"
              :scrolling "no"
@@ -15,11 +16,16 @@
 
 (defn coding-content []
   [:div
-   [:p "Coding Content"]])
+   [:p "I like writing software. Simple."]
+   [:p "I write mostly Go, PHP and JS for my job, but my favorite languages to write are Clojure and Python."]])
 
 (defn gaming-content []
   [:div
-   [:p "Gaming Content"]])
+   [:p "I play a lot of games, but mostly my friends and I make videos of Rainbow 6: Siege as a group named after the members of The Magic School Bus kids cartoon. I'm Dorothy. XD"]
+   [:iframe {:width "560"
+             :height "315"
+             :src "https://www.youtube.com/embed/M4IF29pSrmg?list=UUfi57qoasFpchL1oTKHwHlA"
+             :frameborder "2"}]])
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Vars
@@ -44,7 +50,7 @@
 
 (defn title-component []
   "Page title"
-  [:div
+  [:div {:style {:background-color "white"}}
    [:h1 "Thomas La Piana"]])
 
 (defn column-header [column-title]
